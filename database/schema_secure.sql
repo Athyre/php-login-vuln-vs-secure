@@ -37,19 +37,6 @@ CREATE TABLE login_attempts (
     INDEX idx_username_time (username, attempted_at)
 );
 
--- Data uji dengan password HASH (hasil password_hash('admin123', PASSWORD_DEFAULT) dan
--- password_hash('budi123', PASSWORD_DEFAULT) pada saat skema ini dibuat).
--- Hash ini valid untuk dipakai langsung, tapi kamu juga bisa membuat ulang lewat register.php.
-
-
--- CATATAN: hash contoh di atas hanyalah PLACEHOLDER (bukan hash asli dari 'admin123'/'budi123'),
--- karena hash password_hash() berisi salt acak yang berbeda setiap kali dibuat dan tidak bisa
--- ditulis manual dengan aman di file SQL statis. Cara paling benar dan dianjurkan:
---   1. Jalankan bagian CREATE TABLE/CREATE USER di skema ini dulu (kosongkan dua baris INSERT di atas).
---   2. Daftar ulang akun admin dan budi lewat halaman register.php pada versi secure/,
---      supaya password ter-hash otomatis dan benar oleh PHP (password_hash()).
---   3. Kalau perlu role 'admin', ubah manual kolom role user itu lewat phpMyAdmin setelah daftar.
-
 -- User database khusus aplikasi (jangan pakai root!)
 -- GANTI password di bawah, lalu samakan di secure/config.php
 CREATE USER IF NOT EXISTS 'lab_user_secure'@'localhost' IDENTIFIED BY 'PasswordLab123';
